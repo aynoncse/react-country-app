@@ -1,4 +1,6 @@
-import React, { useState, useEffet, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Container } from 'react-bootstrap';
+import Countries from './components/Countries';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,11 +16,10 @@ const App = () => {
       setCountries(data);
       setIsLoading(false);
       setError(null);
-      console.log(data);
 
     } catch (error) {
       setIsLoading(false);
-      setError(error);
+      setError(error.message);
     }
   }
 
@@ -27,9 +28,16 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <Container className='py-5'>
+      <h4 className='mb-4 text-center'>Country App</h4>
 
-    </div>
+      {isLoading && <h2>Loading..</h2>}
+
+      {error && <h5 className='text-danger'>{error}</h5>}
+
+      {countries && <Countries countries={countries} />}
+
+    </Container >
   );
 }
 

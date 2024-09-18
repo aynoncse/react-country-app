@@ -8,7 +8,6 @@ const Country = ({ country, onRemoveCountry }) => {
         onRemoveCountry(name);
     }
 
-
     return (
         <article className={style.country}>
             <div>

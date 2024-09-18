@@ -1,5 +1,5 @@
 .countries {
-    padding: 3rem;
+    padding: 3rem 0;
     display: grid;
     gap: 2rem;
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import Countries from './components/Countries';
+import Search from './components/Search';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -19,7 +20,6 @@ const App = () => {
       setFilteredCountries(data);
       setIsLoading(false);
       setError(null);
-
     } catch (error) {
       setIsLoading(false);
       setError(error.message);
@@ -36,10 +36,17 @@ const App = () => {
     setFilteredCountries(filteredData);
   }
 
+  const handleSearchCountry = (name) => {
+    const filteredData = countries.filter((country) =>
+      country.name.common.toLowerCase().includes(name.toLowerCase())
+    );
+    setFilteredCountries(filteredData);
+  };
+
   return (
     <Container className='py-5'>
       <h4 className='mb-4 text-center'>Country App</h4>
-
+      <Search onSearchCountry={handleSearchCountry} />
       {isLoading && <h2>Loading..</h2>}
 
       {error && <h5 className='text-danger'>{error}</h5>}

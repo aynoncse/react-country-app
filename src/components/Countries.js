@@ -1,25 +1,23 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 
 import Country from './Country';
+import style from "./countries.module.css"
 
 const Countries = ({ countries }) => {
 
     console.log(countries);
 
     return (
-        <Row className='gy-4'>
+        <div className={style.countries}>
             {
                 countries.map((country, index) => {
                     return (
-                        <Col lg="3" key={uuidv4()} >
-                            <Country country={country} />
-                        </Col>
+                        <Country key={uuidv4()} country={country} />
                     );
                 })
             }
-        </Row>
+        </div>
     );
 }
 

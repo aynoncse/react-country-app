@@ -6,6 +6,8 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [countries, setCountries] = useState([]);
+  const [filteredCountries, setFilteredCountries] = useState(countries);
+
   const url = "https://restcountries.com/v3.1/all";
 
   const fetchData = async (url) => {
@@ -14,6 +16,7 @@ const App = () => {
       const response = await fetch(url);
       const data = await response.json();
       setCountries(data);
+      setFilteredCountries(data);
       setIsLoading(false);
       setError(null);
 
@@ -27,6 +30,12 @@ const App = () => {
     fetchData(url);
   }, []);
 
+
+  const handleRemoveCountry = (name) => {
+    const filteredData = filteredCountries.filter((country) => country.name.common != name);
+    setFilteredCountries(filteredData);
+  }
+
   return (
     <Container className='py-5'>
       <h4 className='mb-4 text-center'>Country App</h4>
@@ -35,7 +44,7 @@ const App = () => {
 
       {error && <h5 className='text-danger'>{error}</h5>}
 
-      {countries && <Countries countries={countries} />}
+      {countries && <Countries countries={filteredCountries} onRemoveCountry={handleRemoveCountry} />}
 
     </Container >
   );

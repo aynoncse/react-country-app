@@ -45,7 +45,6 @@ const App = () => {
 
   return (
     <Container className='py-5'>
-      <h4 className='mb-4 text-center'>Country App</h4>
       <Search onSearchCountry={handleSearchCountry} />
       {isLoading && <h2>Loading..</h2>}
 
